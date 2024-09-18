@@ -1,0 +1,155 @@
+https://nuri.iksi.or.kr/e-book/catImage/660/0030.jpg
+
+
+
+<<< File BookView.vue >>>>>
+
+
+<template>
+    <div class="mx-0 md:mx-2">
+        <p class="text-gray-300 text-sm">
+            <span>{{ currentBook.book }}</span>&gt;
+            <span>{{ currentBook.level }}</span>
+        </p>
+       <div v-for="(url,index) in book" :key="index">
+        <img :src="url" alt="">
+       </div>
+    </div>
+    
+</template> 
+<script setup>
+import {useRoute}  from 'vue-router'
+import {ref,reactive,onMounted} from 'vue'
+const route = useRoute()
+
+const book = ref([])
+const currentBook = ref({book:'', level:''})
+const datas = reactive([
+    {
+        id:1,
+        book:"Sejong",
+        levels:[{
+            id_book: 1,
+            level: "Sejong 1",
+            conver_url: "https://nuri.iksi.or.kr/e-book/catImage/660/001.jpg",
+            book_urls:[
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/001.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/002.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/003.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/004.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/005.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/006.jpg"},]
+        },
+        {   id_book: 2,
+            level: "Sejong 2",
+            conver_url: "https://nuri.iksi.or.kr/e-book/catImage/661/001.jpg",
+            book_urls:[
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/001.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/002.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/003.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/004.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/005.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/006.jpg"},]
+        }
+    ]}
+])
+
+onMounted(() => {
+    const bookFil = route.params.id
+    const newFilter = []
+
+    datas.forEach(d => {
+        d.levels.forEach(level => {
+            if (level.id_book == bookFil) {
+                level.book_urls.forEach(item => {
+                    newFilter.push(item.url)
+                })
+
+        // Set currentBook to the selected book and level by dynamic data binding ដោយប្រើ interpolation ({{ }})
+            currentBook.value.book = d.book
+            currentBook.value.level = level.level
+            
+            }
+        })
+    })
+
+    book.value = newFilter
+})
+</script>
+
+
+<<<<<< File BookView.vue >>>>>
+
+
+<template>
+    <div class="mx-0 md:mx-2">
+        <p class="text-gray-300 text-sm">
+            <span>{{ currentBook.book }}</span>&gt;
+            <span>{{ currentBook.level }}</span>
+        </p>
+       <div v-for="(url,index) in book" :key="index">
+        <img :src="url" alt="">
+       </div>
+    </div>
+    
+</template> 
+<script setup>
+import {useRoute}  from 'vue-router'
+import {ref,reactive,onMounted} from 'vue'
+const route = useRoute()
+
+const book = ref([])
+const currentBook = ref({book:'', level:''})
+
+const datas = reactive([
+    {
+        id:1,
+        book:"Sejong",
+        levels:[{
+            id_book: 1,
+            level: "Sejong 1",
+            conver_url: "https://nuri.iksi.or.kr/e-book/catImage/660/001.jpg",
+            book_urls:[
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/001.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/002.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/003.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/004.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/005.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/660/006.jpg"},]
+        },
+        {   id_book: 2,
+            level: "Sejong 2",
+            conver_url: "https://nuri.iksi.or.kr/e-book/catImage/661/001.jpg",
+            book_urls:[
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/001.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/002.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/003.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/004.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/005.jpg"},
+                {url:"https://nuri.iksi.or.kr/e-book/catImage/661/006.jpg"},]
+        }
+    ]}
+])
+
+onMounted(() => {
+    const bookFil = route.params.id
+    const newFilter = []
+
+    datas.forEach(d => {
+        d.levels.forEach(level => {
+            if (level.id_book == bookFil) {
+                level.book_urls.forEach(item => {
+                    newFilter.push(item.url)
+                })
+
+        // Set currentBook to the selected book and level by dynamic data binding ដោយប្រើ interpolation ({{ }})
+            currentBook.value.book = d.book
+            currentBook.value.level = level.level
+            
+            }
+        })
+    })
+
+    book.value = newFilter
+})
+</script>
